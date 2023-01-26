@@ -8,7 +8,7 @@ public interface CustomerService {
     void updateCustomer(Customer customer,Long id) throws Exception;
 
     void updateCustomer(Customer customer,String email) throws Exception;
-    List<Customer> findAllCustomers();
+    List<CustomerDTO> findAllCustomers();
     Customer findCustomerByEmail(String email);
     void deleteCustomer(Long id);
 }

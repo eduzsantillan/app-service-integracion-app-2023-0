@@ -3,8 +3,6 @@ package com.isil.appservice.customer;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-
 import java.util.Date;
 
 
@@ -28,7 +26,10 @@ public class Customer {
 
     private String documentId;
 
+    private String password;
+
     private Date createdAt;
+
 
 
 

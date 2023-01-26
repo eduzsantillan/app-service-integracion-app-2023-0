@@ -3,6 +3,7 @@ package com.isil.appservice.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,8 +65,25 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public List<Customer> findAllCustomers() {
-        return customerRepository.findAll();
+    public List<CustomerDTO> findAllCustomers() {
+
+        List<Customer> customerList = customerRepository.findAll();
+        List<CustomerDTO> dtoList = new ArrayList<>();
+
+        for(Customer customer : customerList){
+            CustomerDTO dto = CustomerDTO.builder()
+                    .email(customer.getEmail())
+                    .address(customer.getAddress())
+                    .saludo("Hello World!")
+                    .documentId(customer.getDocumentId())
+                    .build();
+
+            dto = dto.initFullname(customer.getName(),customer.getLastname())
+                    .initCreatedThisWeek(customer.getCreatedAt());
+            dtoList.add(dto);
+        }
+
+        return dtoList;
     }
 
     @Override
